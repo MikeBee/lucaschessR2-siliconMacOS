@@ -182,12 +182,19 @@ class MainWindow(LCDialog.LCDialog):
         self.base.set_manager_active(manager)
 
     def muestra(self):
-        flags = QtCore.Qt.Dialog if self.owner else QtCore.Qt.Widget
-        flags |= QtCore.Qt.WindowTitleHint | QtCore.Qt.WindowMinimizeButtonHint | QtCore.Qt.WindowMaximizeButtonHint
-        if self.onTop:
-            flags |= QtCore.Qt.WindowStaysOnTopHint
-
-        self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | flags)
+        import Code
+        if Code.is_macos:
+            # Simplified window flags for macOS
+            if self.owner:
+                self.setWindowFlags(QtCore.Qt.Dialog)
+            else:
+                self.setWindowFlags(QtCore.Qt.Window)
+        else:
+            flags = QtCore.Qt.Dialog if self.owner else QtCore.Qt.Widget
+            flags |= QtCore.Qt.WindowTitleHint | QtCore.Qt.WindowMinimizeButtonHint | QtCore.Qt.WindowMaximizeButtonHint
+            if self.onTop:
+                flags |= QtCore.Qt.WindowStaysOnTopHint
+            self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | flags)
         if self.board.is_maximized():
             self.showMaximized()
         else:

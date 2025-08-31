@@ -466,13 +466,17 @@ class WEngineFast(QtWidgets.QDialog):
 
         self.setWindowTitle(engine.version)
         self.setWindowIcon(Iconos.Engine())
-        self.setWindowFlags(
-            QtCore.Qt.WindowCloseButtonHint
-            | QtCore.Qt.Dialog
-            | QtCore.Qt.WindowTitleHint
-            | QtCore.Qt.WindowMinimizeButtonHint
-            | QtCore.Qt.WindowMaximizeButtonHint
-        )
+        import Code
+        if Code.is_macos:
+            self.setWindowFlags(QtCore.Qt.Dialog)
+        else:
+            self.setWindowFlags(
+                QtCore.Qt.WindowCloseButtonHint
+                | QtCore.Qt.Dialog
+                | QtCore.Qt.WindowTitleHint
+                | QtCore.Qt.WindowMinimizeButtonHint
+                | QtCore.Qt.WindowMaximizeButtonHint
+            )
 
         self.external_engine = engine
         self.list_engines = list_engines

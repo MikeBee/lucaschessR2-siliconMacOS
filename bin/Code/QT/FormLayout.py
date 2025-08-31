@@ -861,9 +861,13 @@ class FormDialog(QtWidgets.QDialog):
     def __init__(self, data, title="", comment="", icon=None, parent=None, if_default=True, dispatch=None,
                  li_extra_options=None):
         super(FormDialog, self).__init__(parent, QtCore.Qt.Dialog)
-        flags = self.windowFlags()
-        flags &= ~QtCore.Qt.WindowContextHelpButtonHint
-        self.setWindowFlags(flags)
+        import Code
+        if Code.is_macos:
+            self.setWindowFlags(QtCore.Qt.Dialog)
+        else:
+            flags = self.windowFlags()
+            flags &= ~QtCore.Qt.WindowContextHelpButtonHint
+            self.setWindowFlags(flags)
 
         # Form
         if isinstance(data[0][0], (list, tuple)):

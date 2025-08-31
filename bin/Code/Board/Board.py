@@ -55,9 +55,14 @@ class Board(QtWidgets.QGraphicsView):
     def __init__(self, parent, config_board, with_menu_visual=True, with_director=True, allow_eboard=False):
         super(Board, self).__init__()
 
-        self.setRenderHints(
-            QtGui.QPainter.Antialiasing | QtGui.QPainter.TextAntialiasing | QtGui.QPainter.SmoothPixmapTransform
-        )
+        import Code
+        if Code.is_macos:
+            # Skip render hints on macOS to avoid QPainter issues
+            pass
+        else:
+            self.setRenderHints(
+                QtGui.QPainter.Antialiasing | QtGui.QPainter.TextAntialiasing | QtGui.QPainter.SmoothPixmapTransform
+            )
         self.setViewportUpdateMode(QtWidgets.QGraphicsView.BoundingRectViewportUpdate)
         self.setCacheMode(QtWidgets.QGraphicsView.CacheBackground)
         self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
@@ -68,7 +73,10 @@ class Board(QtWidgets.QGraphicsView):
         self.escena = QtWidgets.QGraphicsScene(self)
         self.escena.setItemIndexMethod(self.escena.NoIndex)
         self.setScene(self.escena)
-        self.setAlignment(QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft)
+        if Code.is_macos:
+            self.setAlignment(QtCore.Qt.AlignTop)
+        else:
+            self.setAlignment(QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft)
 
         self.main_window = parent
         self.configuration = Code.configuration

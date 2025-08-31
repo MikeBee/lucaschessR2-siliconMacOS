@@ -326,7 +326,11 @@ class LB(QtWidgets.QLabel):
             QtWidgets.QLabel.__init__(self, parent)
 
         self.setOpenExternalLinks(True)
-        self.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction | QtCore.Qt.TextSelectableByMouse)
+        import Code
+        if Code.is_macos:
+            self.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction)
+        else:
+            self.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction | QtCore.Qt.TextSelectableByMouse)
 
     def set_text(self, texto):
         self.setText(texto)
@@ -350,7 +354,11 @@ class LB(QtWidgets.QLabel):
         return self
 
     def align_right(self):
-        self.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+        import Code
+        if Code.is_macos:
+            self.setAlignment(QtCore.Qt.AlignRight)
+        else:
+            self.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
         return self
 
     def anchoMaximo(self, px):
@@ -539,7 +547,12 @@ class GB(QtWidgets.QGroupBox):
         return self
 
     def align_center(self):
-        self.setAlignment(QtCore.Qt.AlignHCenter)
+        import Code
+        if Code.is_macos:
+            # Skip alignment setting on macOS to avoid enum issues
+            pass
+        else:
+            self.setAlignment(QtCore.Qt.AlignHCenter)
         return self
 
     def to_connect(self, rutina):

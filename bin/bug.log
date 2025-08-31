@@ -1,1 +1,468 @@
 Version R 2.20c
+2025-08-31 10:45:40.095136
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/LucasR.py", line 20, in <module>
+    Code.Base.Init.init()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Base/Init.py", line 18, in init
+    resp = LucasChessGui.run_gui(main_procesador)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/LucasChessGui.py", line 133, in run_gui
+    procesador.iniciar_gui()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 184, in iniciar_gui
+    self.main_window = MainWindow.MainWindow(self)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/MainWindow.py", line 25, in __init__
+    LCDialog.LCDialog.__init__(self, owner, titulo, icono, extparam)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/LCDialog.py", line 15, in __init__
+    self.setWindowFlags(
+TypeError: 'PySide2.QtCore.Qt.WindowType' object cannot be interpreted as an integer
+TypeError: 'PySide2.QtCore.Qt.WindowType' object cannot be interpreted as an integer
+
+The above exception was the direct cause of the following exception:
+
+2025-08-31 10:46:08.623126
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/LucasR.py", line 20, in <module>
+    Code.Base.Init.init()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Base/Init.py", line 18, in init
+    resp = LucasChessGui.run_gui(main_procesador)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/LucasChessGui.py", line 133, in run_gui
+    procesador.iniciar_gui()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 184, in iniciar_gui
+    self.main_window = MainWindow.MainWindow(self)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/MainWindow.py", line 25, in __init__
+    LCDialog.LCDialog.__init__(self, owner, titulo, icono, extparam)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/LCDialog.py", line 16, in __init__
+    QtCore.Qt.Dialog
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/QtMacCompat.py", line 32, in safe_or
+    return orig_or(self, other)
+           ^^^^^^^^^^^^^^^^^^^^
+SystemError: <slot wrapper '__or__' of 'PySide2.QtCore.Qt.WindowType' objects> returned a result with an exception set
+2025-08-31 10:46:24.261620
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/LucasR.py", line 20, in <module>
+    Code.Base.Init.init()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Base/Init.py", line 18, in init
+    resp = LucasChessGui.run_gui(main_procesador)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/LucasChessGui.py", line 133, in run_gui
+    procesador.iniciar_gui()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 184, in iniciar_gui
+    self.main_window = MainWindow.MainWindow(self)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/MainWindow.py", line 25, in __init__
+    LCDialog.LCDialog.__init__(self, owner, titulo, icono, extparam)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/LCDialog.py", line 15, in __init__
+    self.setWindowFlags(
+TypeError: 'PySide2.QtWidgets.QWidget.setWindowFlags' called with wrong argument types:
+  PySide2.QtWidgets.QWidget.setWindowFlags(int)
+Supported signatures:
+  PySide2.QtWidgets.QWidget.setWindowFlags(PySide2.QtCore.Qt.WindowFlags)
+2025-08-31 10:46:43.745352
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/LucasR.py", line 20, in <module>
+    Code.Base.Init.init()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Base/Init.py", line 18, in init
+    resp = LucasChessGui.run_gui(main_procesador)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/LucasChessGui.py", line 133, in run_gui
+    procesador.iniciar_gui()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 184, in iniciar_gui
+    self.main_window = MainWindow.MainWindow(self)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/MainWindow.py", line 25, in __init__
+    LCDialog.LCDialog.__init__(self, owner, titulo, icono, extparam)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/LCDialog.py", line 15, in __init__
+    self.setWindowFlags(
+TypeError: 'PySide2.QtWidgets.QWidget.setWindowFlags' called with wrong argument types:
+  PySide2.QtWidgets.QWidget.setWindowFlags(int)
+Supported signatures:
+  PySide2.QtWidgets.QWidget.setWindowFlags(PySide2.QtCore.Qt.WindowFlags)
+2025-08-31 10:47:16.112214
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/LucasR.py", line 20, in <module>
+    Code.Base.Init.init()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Base/Init.py", line 18, in init
+    resp = LucasChessGui.run_gui(main_procesador)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/LucasChessGui.py", line 133, in run_gui
+    procesador.iniciar_gui()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 184, in iniciar_gui
+    self.main_window = MainWindow.MainWindow(self)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/MainWindow.py", line 25, in __init__
+    LCDialog.LCDialog.__init__(self, owner, titulo, icono, extparam)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/LCDialog.py", line 15, in __init__
+    self.setWindowFlags(
+TypeError: 'PySide2.QtWidgets.QWidget.setWindowFlags' called with wrong argument types:
+  PySide2.QtWidgets.QWidget.setWindowFlags(RenderHints)
+Supported signatures:
+  PySide2.QtWidgets.QWidget.setWindowFlags(PySide2.QtCore.Qt.WindowFlags)
+2025-08-31 10:47:32.385228
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/LucasR.py", line 20, in <module>
+    Code.Base.Init.init()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Base/Init.py", line 18, in init
+    resp = LucasChessGui.run_gui(main_procesador)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/LucasChessGui.py", line 133, in run_gui
+    procesador.iniciar_gui()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 184, in iniciar_gui
+    self.main_window = MainWindow.MainWindow(self)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/MainWindow.py", line 31, in __init__
+    self.base = WBase.WBase(self, manager)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 89, in __init__
+    self.create_board()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 246, in create_board
+    self.board = Board.Board(self, config_board, allow_eboard=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Board/Board.py", line 58, in __init__
+    self.setRenderHints(
+TypeError: 'PySide2.QtGui.QPainter.RenderHint' object cannot be interpreted as an integer
+2025-08-31 10:48:04.746093
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/LucasR.py", line 20, in <module>
+    Code.Base.Init.init()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Base/Init.py", line 18, in init
+    resp = LucasChessGui.run_gui(main_procesador)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/LucasChessGui.py", line 133, in run_gui
+    procesador.iniciar_gui()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 184, in iniciar_gui
+    self.main_window = MainWindow.MainWindow(self)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/MainWindow.py", line 31, in __init__
+    self.base = WBase.WBase(self, manager)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 92, in __init__
+    self.create_analysis_bar()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 253, in create_analysis_bar
+    self.analysis_bar = WAnalysisBar.AnalysisBar(self, self.board)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WAnalysisBar.py", line 32, in __init__
+    self.lb_value_up = Controles.LB(self).set_font_type(puntos=7).align_center()
+                       ^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Controles.py", line 329, in __init__
+    self.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction | QtCore.Qt.TextSelectableByMouse)
+TypeError: 'PySide2.QtCore.Qt.TextInteractionFlag' object cannot be interpreted as an integer
+TypeError: 'PySide2.QtCore.Qt.AlignmentFlag' object cannot be interpreted as an integer
+2025-08-31 10:48:15.867686
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/LucasR.py", line 20, in <module>
+    Code.Base.Init.init()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Base/Init.py", line 18, in init
+    resp = LucasChessGui.run_gui(main_procesador)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/LucasChessGui.py", line 133, in run_gui
+    procesador.iniciar_gui()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 184, in iniciar_gui
+    self.main_window = MainWindow.MainWindow(self)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/MainWindow.py", line 31, in __init__
+    self.base = WBase.WBase(self, manager)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 94, in __init__
+    ly_bi = self.creaBloqueInformacion()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 347, in creaBloqueInformacion
+    self.wsolve = WindowSolve.WSolve(self)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WindowSolve.py", line 65, in __init__
+    self.gb = Controles.GB(self, _("Solution"), ly_moves).set_font_type(puntos=11, peso=75).align_center()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Controles.py", line 546, in align_center
+    self.setAlignment(QtCore.Qt.AlignHCenter)
+OverflowError
+TypeError: 'PySide2.QtCore.Qt.AlignmentFlag' object cannot be interpreted as an integer
+2025-08-31 10:48:50.821231
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/LucasR.py", line 20, in <module>
+    Code.Base.Init.init()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Base/Init.py", line 18, in init
+    resp = LucasChessGui.run_gui(main_procesador)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/LucasChessGui.py", line 133, in run_gui
+    procesador.iniciar_gui()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 184, in iniciar_gui
+    self.main_window = MainWindow.MainWindow(self)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/MainWindow.py", line 31, in __init__
+    self.base = WBase.WBase(self, manager)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 94, in __init__
+    ly_bi = self.creaBloqueInformacion()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 347, in creaBloqueInformacion
+    self.wsolve = WindowSolve.WSolve(self)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WindowSolve.py", line 65, in __init__
+    self.gb = Controles.GB(self, _("Solution"), ly_moves).set_font_type(puntos=11, peso=75).align_center()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Controles.py", line 549, in align_center
+    self.setAlignment(QtCore.Qt.AlignHCenter)
+OverflowError
+2025-08-31 10:49:18.943689
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/LucasR.py", line 20, in <module>
+    Code.Base.Init.init()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Base/Init.py", line 18, in init
+    resp = LucasChessGui.run_gui(main_procesador)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/LucasChessGui.py", line 133, in run_gui
+    procesador.iniciar_gui()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 186, in iniciar_gui
+    self.main_window.muestra()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/MainWindow.py", line 190, in muestra
+    self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | flags)
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MainWindow' object has no attribute 'setWindowFlags'. Did you mean: 'setWindowFlag'?
+2025-08-31 11:01:01.514545
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 399, in run_action
+    self.manager.run_action(self.sender().key)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 581, in run_action
+    self.options()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 720, in options
+    resp()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 740, in cambiaconfiguration
+    if WindowConfig.options(self.main_window, self.configuration):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Config/WindowConfig.py", line 219, in options
+    resultado = form.run()
+                ^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/FormLayout.py", line 144, in run
+    return fedit(
+           ^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/FormLayout.py", line 945, in fedit
+    dialog = FormDialog(data, title, comment, icon, parent, if_default, dispatch, li_extra_options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/FormLayout.py", line 866, in __init__
+    self.setWindowFlags(flags)
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'FormDialog' object has no attribute 'setWindowFlags'. Did you mean: 'setWindowFlag'?
+2025-08-31 11:01:19.453649
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 399, in run_action
+    self.manager.run_action(self.sender().key)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 581, in run_action
+    self.options()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 720, in options
+    resp()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 745, in edit_board_colors
+    w = WBoardColors.WBoardColors(self.board)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Board/WBoardColors.py", line 305, in __init__
+    lb_blancas = crea_lb(name)
+                 ^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Board/WBoardColors.py", line 297, in crea_lb
+    return Controles.LB(self, txt + ": ").align_right()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Controles.py", line 357, in align_right
+    if Code.is_macos:
+       ^^^^
+NameError: name 'Code' is not defined
+2025-08-31 11:01:33.110515
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 399, in run_action
+    self.manager.run_action(self.sender().key)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 581, in run_action
+    self.options()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 720, in options
+    resp()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 740, in cambiaconfiguration
+    if WindowConfig.options(self.main_window, self.configuration):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Config/WindowConfig.py", line 219, in options
+    resultado = form.run()
+                ^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/FormLayout.py", line 144, in run
+    return fedit(
+           ^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/FormLayout.py", line 945, in fedit
+    dialog = FormDialog(data, title, comment, icon, parent, if_default, dispatch, li_extra_options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/FormLayout.py", line 866, in __init__
+    self.setWindowFlags(flags)
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'FormDialog' object has no attribute 'setWindowFlags'. Did you mean: 'setWindowFlag'?
+2025-08-31 11:01:40.057872
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 399, in run_action
+    self.manager.run_action(self.sender().key)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 585, in run_action
+    self.menu_tools()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 833, in menu_tools
+    self.menuTools_run(resp)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 870, in menuTools_run
+    self.database(accion, valor)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 947, in database
+    dbpath, path_pgn = WDB_GUtils.new_database(self.main_window, self.configuration, with_import_pgn=True)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Databases/WDB_GUtils.py", line 304, in new_database
+    w = WOptionsDatabase(owner, configuration, dic_data, with_import_pgn, name)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Databases/WDB_GUtils.py", line 41, in __init__
+    self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.Dialog | QtCore.Qt.WindowTitleHint)
+TypeError: 'PySide2.QtCore.Qt.WindowType' object cannot be interpreted as an integer
+2025-08-31 11:02:40.250935
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 399, in run_action
+    self.manager.run_action(self.sender().key)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 569, in run_action
+    self.menuplay()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 361, in menuplay
+    self.menuPlay_run(resp)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 370, in menuPlay_run
+    self.playPerson(rival)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 382, in playPerson
+    uno = QTVarios.blancasNegrasTiempo(self.main_window)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/QTVarios.py", line 198, in blancasNegrasTiempo
+    w = BlancasNegrasTiempo(owner)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/QTVarios.py", line 94, in __init__
+    self.setWindowFlags(
+TypeError: 'PySide2.QtCore.Qt.WindowType' object cannot be interpreted as an integer
+2025-08-31 11:08:45.718520
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Grid.py", line 141, in flags
+    column = self.oColumnasR.column(index.column())
+                                    ^^^^^^^^^^^^^^
+TypeError: 'PySide2.QtCore.Qt.ItemFlag' object cannot be interpreted as an integer
+2025-08-31 11:08:45.893217
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Grid.py", line 141, in flags
+    column = self.oColumnasR.column(index.column())
+                                    ^^^^^^^^^^^^^^
+TypeError: 'PySide2.QtCore.Qt.ItemFlag' object cannot be interpreted as an integer
+2025-08-31 11:08:45.922998
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Grid.py", line 141, in flags
+    column = self.oColumnasR.column(index.column())
+                                    ^^^^^^^^^^^^^^
+TypeError: 'PySide2.QtCore.Qt.ItemFlag' object cannot be interpreted as an integer
+2025-08-31 11:08:45.954729
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Grid.py", line 141, in flags
+    column = self.oColumnasR.column(index.column())
+                                    ^^^^^^^^^^^^^^
+TypeError: 'PySide2.QtCore.Qt.ItemFlag' object cannot be interpreted as an integer
+TypeError: 'PySide2.QtCore.Qt.AlignmentFlag' object cannot be interpreted as an integer
+2025-08-31 11:11:03.339078
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Grid.py", line 141, in flags
+    column = self.oColumnasR.column(index.column())
+                                    ^^^^^^^^^^^^^^
+TypeError: 'PySide2.QtCore.Qt.ItemFlag' object cannot be interpreted as an integer
+2025-08-31 11:11:03.564183
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Grid.py", line 141, in flags
+    column = self.oColumnasR.column(index.column())
+                                    ^^^^^^^^^^^^^^
+TypeError: 'PySide2.QtCore.Qt.ItemFlag' object cannot be interpreted as an integer
+2025-08-31 11:11:03.613179
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Grid.py", line 141, in flags
+    column = self.oColumnasR.column(index.column())
+                                    ^^^^^^^^^^^^^^
+TypeError: 'PySide2.QtCore.Qt.ItemFlag' object cannot be interpreted as an integer
+2025-08-31 11:11:03.666365
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Grid.py", line 141, in flags
+    column = self.oColumnasR.column(index.column())
+                                    ^^^^^^^^^^^^^^
+TypeError: 'PySide2.QtCore.Qt.ItemFlag' object cannot be interpreted as an integer
+TypeError: 'PySide2.QtCore.Qt.AlignmentFlag' object cannot be interpreted as an integer
+2025-08-31 11:12:15.988409
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Grid.py", line 141, in flags
+    column = self.oColumnasR.column(index.column())
+                                    ^^^^^^^^^^^^^^
+TypeError: 'PySide2.QtCore.Qt.ItemFlag' object cannot be interpreted as an integer
+2025-08-31 11:12:16.209948
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Grid.py", line 141, in flags
+    column = self.oColumnasR.column(index.column())
+                                    ^^^^^^^^^^^^^^
+TypeError: 'PySide2.QtCore.Qt.ItemFlag' object cannot be interpreted as an integer
+2025-08-31 11:12:16.293041
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Grid.py", line 141, in flags
+    column = self.oColumnasR.column(index.column())
+                                    ^^^^^^^^^^^^^^
+TypeError: 'PySide2.QtCore.Qt.ItemFlag' object cannot be interpreted as an integer
+2025-08-31 11:12:16.371255
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/Grid.py", line 141, in flags
+    column = self.oColumnasR.column(index.column())
+                                    ^^^^^^^^^^^^^^
+TypeError: 'PySide2.QtCore.Qt.ItemFlag' object cannot be interpreted as an integer
+TypeError: 'PySide2.QtCore.Qt.AlignmentFlag' object cannot be interpreted as an integer
+TypeError: 'PySide2.QtCore.Qt.AlignmentFlag' object cannot be interpreted as an integer
+TypeError: 'PySide2.QtCore.Qt.AlignmentFlag' object cannot be interpreted as an integer
+2025-08-31 11:26:49.308147
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 399, in run_action
+    self.manager.run_action(self.sender().key)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 569, in run_action
+    self.menuplay()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 361, in menuplay
+    self.menuPlay_run(resp)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 367, in menuPlay_run
+    self.libre(config)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 992, in libre
+    dic = WPlayAgainstEngine.play_against_engine(self, _("Play against an engine"))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/PlayAgainstEngine/WPlayAgainstEngine.py", line 1265, in play_against_engine
+    w = WPlayAgainstEngine(procesador, titulo, True)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/PlayAgainstEngine/WPlayAgainstEngine.py", line 62, in __init__
+    self.motores = SelectEngines.SelectEngines(procesador.main_window)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Engines/SelectEngines.py", line 52, in __init__
+    um = QTUtil2.one_moment_please(owner, _("Reading the list of engines"))
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/QTUtil2.py", line 267, in one_moment_please
+    return waiting_message.start(owner, mensaje, physical_pos=physical_pos)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/QTUtil2.py", line 204, in start
+    self.me = MensEspera(
+              ^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/QTUtil2.py", line 49, in __init__
+    self.setWindowFlags(
+TypeError: 'PySide2.QtCore.Qt.WindowType' object cannot be interpreted as an integer
+2025-08-31 11:55:29.700386
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 399, in run_action
+    self.manager.run_action(self.sender().key)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 569, in run_action
+    self.menuplay()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 361, in menuplay
+    self.menuPlay_run(resp)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 367, in menuPlay_run
+    self.libre(config)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 992, in libre
+    dic = WPlayAgainstEngine.play_against_engine(self, _("Play against an engine"))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/PlayAgainstEngine/WPlayAgainstEngine.py", line 1265, in play_against_engine
+    w = WPlayAgainstEngine(procesador, titulo, True)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/PlayAgainstEngine/WPlayAgainstEngine.py", line 62, in __init__
+    self.motores = SelectEngines.SelectEngines(procesador.main_window)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Engines/SelectEngines.py", line 52, in __init__
+    um = QTUtil2.one_moment_please(owner, _("Reading the list of engines"))
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/QTUtil2.py", line 267, in one_moment_please
+    return waiting_message.start(owner, mensaje, physical_pos=physical_pos)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/QTUtil2.py", line 204, in start
+    self.me = MensEspera(
+              ^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/QT/QTUtil2.py", line 49, in __init__
+    self.setWindowFlags(
+TypeError: 'PySide2.QtCore.Qt.WindowType' object cannot be interpreted as an integer

@@ -12,13 +12,18 @@ class LCDialog(QtWidgets.QDialog):
         self.liSplitters = []
         self.setWindowTitle(titulo)
         self.setWindowIcon(icono)
-        self.setWindowFlags(
-            QtCore.Qt.Dialog
-            | QtCore.Qt.WindowTitleHint
-            | QtCore.Qt.WindowMinimizeButtonHint
-            | QtCore.Qt.WindowMaximizeButtonHint
-            | QtCore.Qt.WindowCloseButtonHint
-        )
+        import Code
+        if Code.is_macos:
+            # For macOS, avoid Qt enum bitwise operations - use simpler window flags
+            self.setWindowFlags(QtCore.Qt.Window)
+        else:
+            self.setWindowFlags(
+                QtCore.Qt.Dialog
+                | QtCore.Qt.WindowTitleHint
+                | QtCore.Qt.WindowMinimizeButtonHint
+                | QtCore.Qt.WindowMaximizeButtonHint
+                | QtCore.Qt.WindowCloseButtonHint
+            )
 
     def register_grid(self, grid):
         self.liGrids.append(grid)

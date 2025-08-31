@@ -313,13 +313,17 @@ class WEngineExtend(QtWidgets.QDialog):
 
         self.setWindowTitle(engine.version)
         self.setWindowIcon(Iconos.Engine())
-        self.setWindowFlags(
-            QtCore.Qt.WindowCloseButtonHint
-            | QtCore.Qt.Dialog
-            | QtCore.Qt.WindowTitleHint
-            | QtCore.Qt.WindowMinimizeButtonHint
-            | QtCore.Qt.WindowMaximizeButtonHint
-        )
+        import Code
+        if Code.is_macos:
+            self.setWindowFlags(QtCore.Qt.Dialog)
+        else:
+            self.setWindowFlags(
+                QtCore.Qt.WindowCloseButtonHint
+                | QtCore.Qt.Dialog
+                | QtCore.Qt.WindowTitleHint
+                | QtCore.Qt.WindowMinimizeButtonHint
+                | QtCore.Qt.WindowMaximizeButtonHint
+            )
 
         scroll_area = wgen_options_engine(self, engine)
 

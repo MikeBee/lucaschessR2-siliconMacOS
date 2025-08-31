@@ -16,11 +16,15 @@ from Code.QT import QTUtil2
 class BlancasNegras(QtWidgets.QDialog):
     def __init__(self, parent, both):
         QtWidgets.QDialog.__init__(self, parent)
-        self.setWindowFlags(
-            QtCore.Qt.WindowCloseButtonHint
-            | QtCore.Qt.Dialog
-            | QtCore.Qt.WindowTitleHint
-        )
+        import Code
+        if Code.is_macos:
+            self.setWindowFlags(QtCore.Qt.Dialog)
+        else:
+            self.setWindowFlags(
+                QtCore.Qt.WindowCloseButtonHint
+                | QtCore.Qt.Dialog
+                | QtCore.Qt.WindowTitleHint
+            )
 
         ico_pw = Code.all_pieces.default_icon("K", 64)
         ico_pb = Code.all_pieces.default_icon("k", 64)
@@ -91,11 +95,15 @@ def white_or_black(owner, both):
 class BlancasNegrasTiempo(QtWidgets.QDialog):
     def __init__(self, parent):
         QtWidgets.QDialog.__init__(self, parent)
-        self.setWindowFlags(
-            QtCore.Qt.WindowCloseButtonHint
-            | QtCore.Qt.Dialog
-            | QtCore.Qt.WindowTitleHint
-        )
+        import Code
+        if Code.is_macos:
+            self.setWindowFlags(QtCore.Qt.Dialog)
+        else:
+            self.setWindowFlags(
+                QtCore.Qt.WindowCloseButtonHint
+                | QtCore.Qt.Dialog
+                | QtCore.Qt.WindowTitleHint
+            )
 
         ico_pw = Code.all_pieces.default_icon("K")
         ico_pb = Code.all_pieces.default_icon("k")
@@ -213,11 +221,15 @@ class Tiempo(QtWidgets.QDialog):
             default_seconds=0,
     ):
         super(Tiempo, self).__init__(parent)
-        self.setWindowFlags(
-            QtCore.Qt.WindowCloseButtonHint
-            | QtCore.Qt.Dialog
-            | QtCore.Qt.WindowTitleHint
-        )
+        import Code
+        if Code.is_macos:
+            self.setWindowFlags(QtCore.Qt.Dialog)
+        else:
+            self.setWindowFlags(
+                QtCore.Qt.WindowCloseButtonHint
+                | QtCore.Qt.Dialog
+                | QtCore.Qt.WindowTitleHint
+            )
 
         self.setWindowTitle(_("Time"))
         self.setWindowIcon(Iconos.MoverTiempo())
@@ -646,11 +658,15 @@ class LCMenuPiezas(Controles.Menu):
 class ImportarFichero(QtWidgets.QDialog):
     def __init__(self, parent, titulo, siErroneos, siWorkDone, icono):
         QtWidgets.QDialog.__init__(self, parent)
-        self.setWindowFlags(
-            QtCore.Qt.WindowCloseButtonHint
-            | QtCore.Qt.Dialog
-            | QtCore.Qt.WindowTitleHint
-        )
+        import Code
+        if Code.is_macos:
+            self.setWindowFlags(QtCore.Qt.Dialog)
+        else:
+            self.setWindowFlags(
+                QtCore.Qt.WindowCloseButtonHint
+                | QtCore.Qt.Dialog
+                | QtCore.Qt.WindowTitleHint
+            )
 
         self.setWindowTitle(titulo)
         self.setWindowIcon(icono)
@@ -786,11 +802,15 @@ class MensajeFics(QtWidgets.QDialog):
         QtWidgets.QDialog.__init__(self, parent)
 
         self.setWindowTitle(_("Fics-Elo"))
-        self.setWindowFlags(
-            QtCore.Qt.WindowCloseButtonHint
-            | QtCore.Qt.Dialog
-            | QtCore.Qt.WindowTitleHint
-        )
+        import Code
+        if Code.is_macos:
+            self.setWindowFlags(QtCore.Qt.Dialog)
+        else:
+            self.setWindowFlags(
+                QtCore.Qt.WindowCloseButtonHint
+                | QtCore.Qt.Dialog
+                | QtCore.Qt.WindowTitleHint
+            )
         self.setWindowIcon(Iconos.Fics())
         self.setStyleSheet("QDialog, QLabel { background: #E3F1F9 }")
 
@@ -840,11 +860,15 @@ class MensajeFide(QtWidgets.QDialog):
         QtWidgets.QDialog.__init__(self, parent)
 
         self.setWindowTitle(_("Fide-Elo"))
-        self.setWindowFlags(
-            QtCore.Qt.WindowCloseButtonHint
-            | QtCore.Qt.Dialog
-            | QtCore.Qt.WindowTitleHint
-        )
+        import Code
+        if Code.is_macos:
+            self.setWindowFlags(QtCore.Qt.Dialog)
+        else:
+            self.setWindowFlags(
+                QtCore.Qt.WindowCloseButtonHint
+                | QtCore.Qt.Dialog
+                | QtCore.Qt.WindowTitleHint
+            )
         self.setWindowIcon(Iconos.Fide())
         self.setStyleSheet("QDialog, QLabel { background: #E9E9E9 }")
 
@@ -1166,11 +1190,15 @@ class WInfo(QtWidgets.QDialog):
 
         self.setWindowTitle(titulo)
         self.setWindowIcon(Iconos.Aplicacion64())
-        self.setWindowFlags(
-            QtCore.Qt.WindowCloseButtonHint
-            | QtCore.Qt.Dialog
-            | QtCore.Qt.WindowTitleHint
-        )
+        import Code
+        if Code.is_macos:
+            self.setWindowFlags(QtCore.Qt.Dialog)
+        else:
+            self.setWindowFlags(
+                QtCore.Qt.WindowCloseButtonHint
+                | QtCore.Qt.Dialog
+                | QtCore.Qt.WindowTitleHint
+            )
 
         f = Controles.FontType(puntos=20)
 

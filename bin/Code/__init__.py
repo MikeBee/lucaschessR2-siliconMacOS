@@ -4,6 +4,10 @@ import sys
 
 from Code import Util
 
+# Apply macOS Qt compatibility patches early
+# if sys.platform == "darwin":
+#     from Code.QT import QtMacCompat
+
 Util.randomize()
 
 current_dir = os.path.abspath(os.path.realpath(os.path.dirname(sys.argv[0])))
@@ -37,11 +41,13 @@ def path_resource(*lista):
 
 
 is_linux = sys.platform.startswith("linux")
-is_windows = not is_linux
+is_macos = sys.platform == "darwin"
+is_windows = not (is_linux or is_macos)
 
-if is_linux:
+if is_linux or is_macos:
     startfile = os.system
-    os.environ["XDG_SESSION_TYPE"] = "xcb"
+    if is_linux:
+        os.environ["XDG_SESSION_TYPE"] = "xcb"
 else:
     if not sys.argv[0].endswith(".py"):
         os.environ["QT_PLUGIN_PATH"] = Util.opj(
