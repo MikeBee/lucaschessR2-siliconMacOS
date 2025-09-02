@@ -1,0 +1,34 @@
+2025-09-01 12:50:41.387929
+Traceback (most recent call last):
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/MainWindow/WBase.py", line 399, in run_action
+    self.manager.run_action(self.sender().key)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 569, in run_action
+    self.menuplay()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 361, in menuplay
+    self.menuPlay_run(resp)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 370, in menuPlay_run
+    self.playPerson(rival)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Procesador.py", line 399, in playPerson
+    self.manager.start(dic)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/PlayAgainstEngine/ManagerPlayAgainstEngine.py", line 124, in start
+    self.base_inicio(dic_var)
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/PlayAgainstEngine/ManagerPerson.py", line 46, in base_inicio
+    self.xrival.set_option("Personality", dic_var["RIVAL"])
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Engines/EngineManager.py", line 478, in set_option
+    self.check_engine()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Engines/EngineManager.py", line 175, in check_engine
+    self.engine = EngineRun.RunEngine(
+                  ^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Engines/EngineRun.py", line 71, in __init__
+    self.start()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Engines/EngineRun.py", line 253, in start
+    self.start_engine()
+  File "/Volumes/Mini-Ext/mini-external/Development/Lucas/lucaschessR2/bin/Code/Engines/EngineRun.py", line 236, in start_engine
+    self.process = subprocess.Popen(
+                   ^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/python@3.11/3.11.13/Frameworks/Python.framework/Versions/3.11/lib/python3.11/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/local/Cellar/python@3.11/3.11.13/Frameworks/Python.framework/Versions/3.11/lib/python3.11/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+OSError: [Errno 8] Exec format error: './irina'
+TypeError: 'PySide2.QtCore.Qt.AlignmentFlag' object cannot be interpreted as an integer

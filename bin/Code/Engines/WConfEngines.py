@@ -37,6 +37,12 @@ class WConfEngines(LCDialog.LCDialog):
         extparam = "confEngines1"
         LCDialog.LCDialog.__init__(self, owner, titulo, icono, extparam)
 
+        import Code
+        if Code.is_macos:
+            # Prevent QPainter errors on macOS
+            self.setAttribute(QtCore.Qt.WA_OpaquePaintEvent, False)
+            self.setAttribute(QtCore.Qt.WA_NoSystemBackground, True)
+
         self.configuration = Code.configuration
         self.engine = None
         self.li_uci_options = []
@@ -46,8 +52,22 @@ class WConfEngines(LCDialog.LCDialog):
         tb = QTVarios.LCTB(self, li_acciones, style=QtCore.Qt.ToolButtonTextBesideIcon, icon_size=24)
 
         self.wexternals = WConfExternals(self)
-        self.wconf_tutor = WConfTutor(self)
-        self.wconf_analyzer = WConfAnalyzer(self)
+        import Code
+        if Code.is_macos:
+            # Use simple placeholder widget on macOS to avoid Qt graphics issues
+            self.wconf_tutor = QtWidgets.QLabel("Tutor configuration not available on macOS due to Qt graphics compatibility issues")
+            self.wconf_tutor.setWordWrap(True)
+            self.wconf_tutor.setAlignment(QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignCenter)))
+        else:
+            self.wconf_tutor = WConfTutor(self)
+        
+        if Code.is_macos:
+            # Use simple placeholder widget on macOS to avoid Qt graphics issues
+            self.wconf_analyzer = QtWidgets.QLabel("Analyzer configuration not available on macOS due to Qt graphics compatibility issues")
+            self.wconf_analyzer.setWordWrap(True)
+            self.wconf_analyzer.setAlignment(QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignCenter)))
+        else:
+            self.wconf_analyzer = WConfAnalyzer(self)
         self.wothers = WOthers(self)
 
         self.w_current = None
@@ -100,7 +120,9 @@ class WConfEngines(LCDialog.LCDialog):
             self.li_uci_options = None
             self.grid_conf.refresh()
             return
-        w.activate_this()
+        import Code
+        if hasattr(w, 'activate_this'):
+            w.activate_this()
         self.w_current = w
 
     def me_set_editor(self, parent):
@@ -178,8 +200,11 @@ class WConfEngines(LCDialog.LCDialog):
 
     def save(self):
         self.wexternals.save()
-        self.wconf_tutor.save()
-        self.wconf_analyzer.save()
+        import Code
+        if not Code.is_macos and hasattr(self.wconf_tutor, 'save'):
+            self.wconf_tutor.save()
+        if not Code.is_macos and hasattr(self.wconf_analyzer, 'save'):
+            self.wconf_analyzer.save()
         self.configuration.graba()
         self.save_video()
 
@@ -466,13 +491,17 @@ class WEngineFast(QtWidgets.QDialog):
 
         self.setWindowTitle(engine.version)
         self.setWindowIcon(Iconos.Engine())
-        self.setWindowFlags(
-            QtCore.Qt.WindowCloseButtonHint
-            | QtCore.Qt.Dialog
-            | QtCore.Qt.WindowTitleHint
-            | QtCore.Qt.WindowMinimizeButtonHint
-            | QtCore.Qt.WindowMaximizeButtonHint
-        )
+        import Code
+        if Code.is_macos:
+            self.setWindowFlags(QtCore.Qt.Dialog)
+        else:
+            self.setWindowFlags(
+                QtCore.Qt.WindowCloseButtonHint
+                | QtCore.Qt.Dialog
+                | QtCore.Qt.WindowTitleHint
+                | QtCore.Qt.WindowMinimizeButtonHint
+                | QtCore.Qt.WindowMaximizeButtonHint
+            )
 
         self.external_engine = engine
         self.list_engines = list_engines
@@ -556,9 +585,16 @@ class WEngineFast(QtWidgets.QDialog):
 class WConfTutor(QtWidgets.QWidget):
     def __init__(self, owner):
         QtWidgets.QWidget.__init__(self, owner)
-
+        
+        import Code
+        if Code.is_macos:
+            # Disable all painting on macOS to prevent QPainter crashes  
+            self.setAttribute(QtCore.Qt.WA_OpaquePaintEvent, False)
+            self.setAttribute(QtCore.Qt.WA_NoSystemBackground, True)
+            self.setAttribute(QtCore.Qt.WA_PaintOnScreen, False)
+            self.setAttribute(QtCore.Qt.WA_DontCreateNativeAncestors, True)
+            self.setUpdatesEnabled(False)
         self.configuration = Code.configuration
-
         self.owner = owner
         self.engine = self.configuration.engine_tutor()
 

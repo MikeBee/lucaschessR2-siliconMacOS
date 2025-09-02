@@ -207,11 +207,13 @@ class FlechaSC(BoardBlocks.BloqueEspSC):
         pm.fill(QtCore.Qt.transparent)
 
         painter = QtGui.QPainter()
-        painter.begin(pm)
-        painter.setRenderHint(painter.Antialiasing, True)
-        painter.setRenderHint(painter.SmoothPixmapTransform, True)
-        self.paint(painter, None, None)
-        painter.end()
+        import Code
+        if painter.begin(pm):
+            if not Code.is_macos:
+                painter.setRenderHint(painter.Antialiasing, True)
+                painter.setRenderHint(painter.SmoothPixmapTransform, True)
+            self.paint(painter, None, None)
+            painter.end()
 
         pm1 = pm.copy(0, 0, 32, 32)
 
@@ -398,10 +400,12 @@ def pixmapArrow(bf, width, height):
     pm.fill(QtCore.Qt.transparent)
 
     painter = QtGui.QPainter()
-    painter.begin(pm)
-    painter.setRenderHint(painter.Antialiasing, True)
-    painter.setRenderHint(painter.SmoothPixmapTransform, True)
-    paintArrow(painter, bf)
-    painter.end()
+    import Code
+    if painter.begin(pm):
+        if not Code.is_macos:
+            painter.setRenderHint(painter.Antialiasing, True)
+            painter.setRenderHint(painter.SmoothPixmapTransform, True)
+        paintArrow(painter, bf)
+        painter.end()
 
     return pm

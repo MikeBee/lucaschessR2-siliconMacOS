@@ -241,13 +241,17 @@ class WWork(QtWidgets.QDialog):
 
         self.setWindowTitle(work.path_to_exe())
         self.setWindowIcon(Iconos.Engine())
-        self.setWindowFlags(
-            QtCore.Qt.WindowCloseButtonHint
-            | QtCore.Qt.Dialog
-            | QtCore.Qt.WindowTitleHint
-            | QtCore.Qt.WindowMinimizeButtonHint
-            | QtCore.Qt.WindowMaximizeButtonHint
-        )
+        import Code
+        if Code.is_macos:
+            self.setWindowFlags(QtCore.Qt.Dialog)
+        else:
+            self.setWindowFlags(
+                QtCore.Qt.WindowCloseButtonHint
+                | QtCore.Qt.Dialog
+                | QtCore.Qt.WindowTitleHint
+                | QtCore.Qt.WindowMinimizeButtonHint
+                | QtCore.Qt.WindowMaximizeButtonHint
+            )
 
         tb = QTVarios.tb_accept_cancel(self)
 

@@ -8,6 +8,11 @@
 
 import sys
 import warnings
+import os
+
+# Set Qt environment for macOS before importing Code  
+if sys.platform == "darwin":
+    pass  # Qt layer settings cause warnings on some macOS versions
 
 import Code
 

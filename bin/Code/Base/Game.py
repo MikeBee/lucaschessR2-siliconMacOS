@@ -1160,11 +1160,13 @@ def pgn_game(pgn):
                 vl = kv[pos + 1:].strip()
                 lbup = lb.upper()
                 if lbup == "FEN":
-                    FasterCode.set_fen(vl)
-                    if vl != FEN_INITIAL:
-                        game.set_fen(vl)
+                    # Clean quotes from FEN value
+                    clean_vl = vl.strip().strip('"').strip("'")
+                    FasterCode.set_fen(clean_vl)
+                    if clean_vl != FEN_INITIAL:
+                        game.set_fen(clean_vl)
                         last_posicion = game.first_position
-                        game.set_tag(lb, vl)
+                        game.set_tag(lb, clean_vl)
                         si_fen = True
                 elif lbup == "RESULT":
                     game.result = vl

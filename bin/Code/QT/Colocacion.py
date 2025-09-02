@@ -8,17 +8,29 @@ class V(QtWidgets.QVBoxLayout):
 
     def controlc(self, control):
         self.addWidget(control)
-        self.setAlignment(QtCore.Qt.AlignCenter)
+        import Code
+        if Code.is_macos:
+            self.setAlignment(QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignCenter)))
+        else:
+            self.setAlignment(QtCore.Qt.AlignCenter)
         return self
 
     def controld(self, control):
         self.addWidget(control)
-        self.setAlignment(control, QtCore.Qt.AlignRight)
+        import Code
+        if Code.is_macos:
+            self.setAlignment(control, QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignRight)))
+        else:
+            self.setAlignment(control, QtCore.Qt.AlignRight)
         return self
 
     def controli(self, control):
         self.addWidget(control)
-        self.setAlignment(control, QtCore.Qt.AlignLeft)
+        import Code
+        if Code.is_macos:
+            self.setAlignment(control, QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignLeft)))
+        else:
+            self.setAlignment(control, QtCore.Qt.AlignLeft)
         return self
 
     def otro(self, layout):
@@ -45,12 +57,20 @@ class H(QtWidgets.QHBoxLayout):
 
     def controld(self, control):
         self.addWidget(control)
-        self.setAlignment(control, QtCore.Qt.AlignRight)
+        import Code
+        if Code.is_macos:
+            self.setAlignment(control, QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignRight)))
+        else:
+            self.setAlignment(control, QtCore.Qt.AlignRight)
         return self
 
     def controli(self, control):
         self.addWidget(control)
-        self.setAlignment(control, QtCore.Qt.AlignLeft)
+        import Code
+        if Code.is_macos:
+            self.setAlignment(control, QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignLeft)))
+        else:
+            self.setAlignment(control, QtCore.Qt.AlignLeft)
         return self
 
     def otro(self, layout):
@@ -59,12 +79,20 @@ class H(QtWidgets.QHBoxLayout):
 
     def otroi(self, layout):
         self.addLayout(layout)
-        self.setAlignment(layout, QtCore.Qt.AlignLeft)
+        import Code
+        if Code.is_macos:
+            self.setAlignment(layout, QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignLeft)))
+        else:
+            self.setAlignment(layout, QtCore.Qt.AlignLeft)
         return self
 
     def otroc(self, layout):
         self.addLayout(layout)
-        self.setAlignment(layout, QtCore.Qt.AlignCenter)
+        import Code
+        if Code.is_macos:
+            self.setAlignment(layout, QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignCenter)))
+        else:
+            self.setAlignment(layout, QtCore.Qt.AlignCenter)
         return self
 
     def espacio(self, espacio):

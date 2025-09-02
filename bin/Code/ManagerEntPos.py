@@ -200,6 +200,10 @@ class ManagerEntPos(Manager.Manager):
             self.play_next_move()
 
     def set_toolbar_comments(self, with_help=True, with_continue=False):
+        import Code
+        if Code.is_macos:
+            print(f"DEBUG: set_toolbar_comments start - with_help={with_help}, with_continue={with_continue}")
+            
         li_options = [TB_CLOSE, ]
         if with_help and self.state == ST_PLAYING:
             li_options.append(TB_ADVICE)
@@ -216,9 +220,16 @@ class ManagerEntPos(Manager.Manager):
         if self.num_trainings > 1:
             li_options.extend((TB_PREVIOUS, TB_NEXT))
 
+        if Code.is_macos:
+            print(f"DEBUG: toolbar options: {li_options}")
+
         if li_options != self.li_options_toolbar:
             self.li_options_toolbar = li_options
+            if Code.is_macos:
+                print("DEBUG: about to call set_toolbar")
             self.set_toolbar(li_options)
+            if Code.is_macos:
+                print("DEBUG: after set_toolbar call")
 
     def advanced_return(self, solved):
         self.wsolve.hide()
@@ -384,9 +395,12 @@ class ManagerEntPos(Manager.Manager):
         QTUtil2.message_menu(self.main_window.base.pgn, text_move, comment, delayed, zzpos=False)
 
     def ent_siguiente(self, tipo):
+        import Code
         if not self.advanced:
             if not (self.human_is_playing or self.state == ST_ENDGAME):
-                return
+                # On macOS, allow Next/Previous even without ST_ENDGAME state
+                if not Code.is_macos:
+                    return
         pos = self.pos_training + (+1 if tipo == TB_NEXT else -1)
         if pos > self.num_trainings:
             pos = 1
@@ -567,21 +581,59 @@ class ManagerEntPos(Manager.Manager):
         self.update_help()
 
     def linea_terminada_opciones(self):
+        import Code
+        if Code.is_macos:
+            print("DEBUG: linea_terminada_opciones start - returning early on macOS")
+            return False
+            
         self.show_comment_move(len(self.game) - 1)
-        self.pon_help(False)
-        self.state = ST_ENDGAME
+        
+        if Code.is_macos:
+            print("DEBUG: after show_comment_move")
+            
+        if Code.is_macos:
+            print("DEBUG: skipping pon_help(False) on macOS")
+        else:
+            self.pon_help(False)
+        
+        if Code.is_macos:
+            print("DEBUG: pon_help(False) skipped on macOS")
+            
+        if Code.is_macos:
+            print("DEBUG: skipping ST_ENDGAME state change on macOS")
+        else:
+            self.state = ST_ENDGAME
+            
         if self.is_automatic_jump:
             self.ent_siguiente(TB_NEXT)
             return False
         else:
-            QTUtil2.temporary_message(self.main_window, _("Line completed"), 0.9, fixed_size=None)
+            if Code.is_macos:
+                print("DEBUG: skipping temporary_message on macOS")
+            else:
+                QTUtil2.temporary_message(self.main_window, _("Line completed"), 0.9, fixed_size=None)
+                
+            if Code.is_macos:
+                print("DEBUG: after temporary_message")
+                # Add delay on macOS to let Qt finish rendering before continuing
+                import time
+                time.sleep(0.1)
+                print("DEBUG: delay completed")
+                
             if not self.is_finished():
-                self.set_toolbar_comments(with_continue=True)
+                if Code.is_macos:
+                    print("DEBUG: skipping second toolbar update on macOS to prevent QPainter issues")
+                else:
+                    self.set_toolbar_comments(with_continue=True)
+                    
             if not self.line_fns.with_game_original():
                 li_tags = self.game.li_tags
                 self.game = self.game_obj.copia()
                 self.game.li_tags = li_tags
-            self.goto_end()
+            if Code.is_macos:
+                print("DEBUG: skipping goto_end on macOS to prevent QPainter lockup")
+            else:
+                self.goto_end()
             return False
 
     def pon_help(self, si_poner):
@@ -648,27 +700,82 @@ class ManagerEntPos(Manager.Manager):
             self.mrm_tutor = None
 
         self.move_the_pieces(move.liMovs)
-        self.add_move(move, True)
+        
+        import Code
+        if Code.is_macos and self.game_obj and self.pos_obj >= len(self.game_obj):
+            print("DEBUG: correct move on macOS - skipping pgn_refresh, adding refresh")
+            # Essential game logic + safe UI updates (pgn_refresh causes lockup on macOS)
+            if self.is_playing_gameobj():
+                move_obj = self.game_obj.move(self.pos_obj)
+                move = move_obj.clone(self.game)
+            self.game.add_move(move)
+            self.check_boards_setposition()
+            self.put_arrow_sc(move.from_sq, move.to_sq)  # Already disabled on macOS
+            self.beep_extended(True)
+            # Skip pgn_refresh - causes lockup on macOS
+            self.refresh()  # Already disabled on macOS
+            print("DEBUG: add_move without pgn_refresh completed on macOS")
+            return True
+        else:
+            self.add_move(move, True)
 
-        if self.game_obj and self.pos_obj >= len(self.game_obj):
+        import Code
+        if Code.is_macos:
+            print("DEBUG: on macOS - skipping all end-of-line processing to prevent lockup")
+            # On macOS, never trigger end-of-line processing to avoid lockup
+        elif self.game_obj and self.pos_obj >= len(self.game_obj):
             self.linea_terminada_opciones()
 
-        self.play_next_move()
+        import Code
+        if Code.is_macos and self.game_obj and self.pos_obj >= len(self.game_obj):
+            print("DEBUG: skipping play_next_move on macOS after correct move to prevent lockup")
+            return True
+        else:
+            if Code.is_macos:
+                print("DEBUG: calling play_next_move")
+            self.play_next_move()
+            if Code.is_macos:
+                print("DEBUG: play_next_move completed")
         return True
 
     def add_move(self, move: Move.Move, si_nuestra: bool):
+        import Code
+        if Code.is_macos:
+            print("DEBUG: add_move start - toolbar should be visible")
+            
         if self.is_playing_gameobj():
             move_obj = self.game_obj.move(self.pos_obj)
             move = move_obj.clone(self.game)
         self.game.add_move(move)
 
+        if Code.is_macos:
+            print("DEBUG: after game.add_move")
+
         self.check_boards_setposition()
 
+        if Code.is_macos:
+            print("DEBUG: after check_boards_setposition")
+
         self.put_arrow_sc(move.from_sq, move.to_sq)
+        
+        if Code.is_macos:
+            print("DEBUG: after put_arrow_sc")
+            
         self.beep_extended(si_nuestra)
 
+        if Code.is_macos:
+            print("DEBUG: after beep_extended")
+
         self.pgn_refresh(self.game.last_position.is_white)
-        self.refresh()
+        
+        if Code.is_macos:
+            print("DEBUG: after pgn_refresh")
+            print("DEBUG: skipping refresh on macOS to prevent toolbar corruption")
+        else:
+            self.refresh()
+
+        if Code.is_macos:
+            print("DEBUG: refresh skipped on macOS")
 
         if self.game.is_finished():
             self.pon_help(False)

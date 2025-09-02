@@ -55,11 +55,18 @@ class Board(QtWidgets.QGraphicsView):
     def __init__(self, parent, config_board, with_menu_visual=True, with_director=True, allow_eboard=False):
         super(Board, self).__init__()
 
-        self.setRenderHints(
-            QtGui.QPainter.Antialiasing | QtGui.QPainter.TextAntialiasing | QtGui.QPainter.SmoothPixmapTransform
-        )
-        self.setViewportUpdateMode(QtWidgets.QGraphicsView.BoundingRectViewportUpdate)
-        self.setCacheMode(QtWidgets.QGraphicsView.CacheBackground)
+        import Code
+        if Code.is_macos:
+            # Disable all graphics optimizations on macOS to avoid QPainter issues
+            self.setViewportUpdateMode(QtWidgets.QGraphicsView.NoViewportUpdate)
+            self.setAttribute(QtCore.Qt.WA_OpaquePaintEvent, False)
+            self.setAttribute(QtCore.Qt.WA_NoSystemBackground, True)
+        else:
+            self.setRenderHints(
+                QtGui.QPainter.Antialiasing | QtGui.QPainter.TextAntialiasing | QtGui.QPainter.SmoothPixmapTransform
+            )
+            self.setViewportUpdateMode(QtWidgets.QGraphicsView.BoundingRectViewportUpdate)
+            self.setCacheMode(QtWidgets.QGraphicsView.CacheBackground)
         self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.setDragMode(self.NoDrag)
@@ -68,7 +75,10 @@ class Board(QtWidgets.QGraphicsView):
         self.escena = QtWidgets.QGraphicsScene(self)
         self.escena.setItemIndexMethod(self.escena.NoIndex)
         self.setScene(self.escena)
-        self.setAlignment(QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft)
+        if Code.is_macos:
+            self.setAlignment(QtCore.Qt.AlignTop)
+        else:
+            self.setAlignment(QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft)
 
         self.main_window = parent
         self.configuration = Code.configuration
@@ -730,7 +740,12 @@ class Board(QtWidgets.QGraphicsView):
             self.indicadorSC_menu = BoardElements.PixmapSC(
                 self.escena, indicador_menu, pixmap=Iconos.pmSettings(), rutina=self.launch_visual_menu
             )
-            self.indicadorSC_menu.setOpacity(0.50 if self.configuration.x_opacity_tool_board == 10 else 0.01)
+            import Code
+            if Code.is_macos:
+                # Make settings icon more visible on macOS
+                self.indicadorSC_menu.setOpacity(0.75)
+            else:
+                self.indicadorSC_menu.setOpacity(0.50 if self.configuration.x_opacity_tool_board == 10 else 0.01)
 
             if self.siDirectorIcon:
                 script = BoardTypes.Imagen()
@@ -907,10 +922,17 @@ class Board(QtWidgets.QGraphicsView):
             reg.run(self.exec_kb_buffer)
 
     def launch_visual_menu(self):
+        import Code
+        if Code.is_macos:
+            print("DEBUG: launch_visual_menu triggered on macOS")
+            
         if not self.with_menu_visual:
             return
 
         menu = QTVarios.LCMenu12(self)
+        
+        if Code.is_macos:
+            print("DEBUG: menu created, adding options")
 
         menu.opcion("colors", _("Colors"), Iconos.Colores())
         menu.separador()
@@ -942,7 +964,11 @@ class Board(QtWidgets.QGraphicsView):
         menu.opcion("keys", _("Active keys") + " [%s-K]" % _("ALT"), Iconos.Rename())
         menu.separador()
 
+        if Code.is_macos:
+            print("DEBUG: about to launch menu")
         resp = menu.lanza()
+        if Code.is_macos:
+            print(f"DEBUG: menu returned: {resp}")
         if resp is None:
             return
         elif resp == "colors":
@@ -1042,9 +1068,22 @@ class Board(QtWidgets.QGraphicsView):
             self.guion.play()
 
     def cambiaSize(self):
-        imp = WTamBoard(self)
-        imp.colocate()
-        imp.exec_()
+        import Code
+        if Code.is_macos:
+            print("DEBUG: cambiaSize called")
+        try:
+            imp = WTamBoard(self)
+            if Code.is_macos:
+                print("DEBUG: WTamBoard created successfully")
+            imp.colocate()
+            if Code.is_macos:
+                print("DEBUG: about to exec WTamBoard")
+            imp.exec_()
+        except Exception as e:
+            if Code.is_macos:
+                print(f"DEBUG: Error in cambiaSize: {e}")
+                import traceback
+                traceback.print_exc()
 
     def cambiaPiezas(self, cual):
         self.config_board.cambiaPiezas(cual)
@@ -1915,6 +1954,11 @@ class Board(QtWidgets.QGraphicsView):
             self.put_arrow_sc(a1h8[:2], a1h8[2:])
 
     def put_arrow_sc(self, from_a1h8, to_a1h8):
+        import Code
+        if Code.is_macos:
+            # Skip arrow rendering on macOS to prevent QPainter issues with toolbar
+            return
+            
         a1h8 = from_a1h8 + to_a1h8
         if self.arrow_sc is None:
             self.arrow_sc = self.creaFlechaSC(a1h8)
@@ -2637,58 +2681,102 @@ class Board(QtWidgets.QGraphicsView):
 
 class WTamBoard(QtWidgets.QDialog):
     def __init__(self, board):
+        import Code
+        if Code.is_macos:
+            print("DEBUG: WTamBoard constructor called")
 
-        QtWidgets.QDialog.__init__(self, board.parent())
+        try:
+            QtWidgets.QDialog.__init__(self, board.parent())
 
-        self.setWindowTitle(_("Change board size"))
-        self.setWindowIcon(Iconos.ResizeBoard())
-        self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.Dialog | QtCore.Qt.WindowTitleHint)
+            self.setWindowTitle(_("Change board size"))
+            self.setWindowIcon(Iconos.ResizeBoard())
+            if Code.is_macos:
+                flags = QtCore.Qt.WindowFlags(int(QtCore.Qt.WindowCloseButtonHint) | int(QtCore.Qt.Dialog) | int(QtCore.Qt.WindowTitleHint))
+                self.setWindowFlags(flags)
+            else:
+                self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.Dialog | QtCore.Qt.WindowTitleHint)
 
-        self._dispatch_size = board._dispatch_size
-        self.board = board
-        self.config_board = board.config_board
+            self._dispatch_size = board._dispatch_size
+            self.board = board
+            self.config_board = board.config_board
 
-        ap = self.config_board.width_piece()
+            ap = self.config_board.width_piece()
+            if Code.is_macos:
+                print(f"DEBUG: current width_piece: {ap}")
 
-        self.antes = ap
+            self.antes = ap
 
-        li_tams = [
-            (_("Very large"), 80),
-            (_("Large"), 64),
-            (_("Medium"), 48),
-            (_("Medium-small"), 32),
-            (_("Small"), 24),
-            (_("Very small"), 16),
-            (_("Custom size"), 0),
-            (_("Initial size"), -1),
-            (_("By default"), -2),
-        ]
+            li_tams = [
+                (_("Very large"), 80),
+                (_("Large"), 64),
+                (_("Medium"), 48),
+                (_("Medium-small"), 32),
+                (_("Small"), 24),
+                (_("Very small"), 16),
+                (_("Custom size"), 0),
+                (_("Initial size"), -1),
+                (_("By default"), -2),
+            ]
+            
+            if Code.is_macos:
+                print("DEBUG: creating combo box")
 
-        self.cb = Controles.CB(self, li_tams, self.width_for_cb(ap)).capture_changes(self.changed_width_cb)
+            self.cb = Controles.CB(self, li_tams, self.width_for_cb(ap)).capture_changes(self.changed_width_cb)
+            
+            if Code.is_macos:
+                print("DEBUG: combo box created")
 
-        minimo = self.board.minimum_size
-        maximo = board.calc_width_mx_piece() + 30
+            minimo = self.board.minimum_size
+            maximo = board.calc_width_mx_piece() + 30
+            
+            if Code.is_macos:
+                print(f"DEBUG: size range {minimo} to {maximo}")
 
-        self.sb = Controles.SB(self, ap, minimo, maximo).capture_changes(self.cambiado_tam_sb)
+            self.sb = Controles.SB(self, ap, minimo, maximo).capture_changes(self.cambiado_tam_sb)
+            
+            if Code.is_macos:
+                print("DEBUG: spinbox created")
 
-        self.sl = Controles.SL(self, minimo, maximo, ap, self.cambiado_tam_sl, tick=0).set_width(180)
+            self.sl = Controles.SL(self, minimo, maximo, ap, self.cambiado_tam_sl, tick=0).set_width(180)
+            
+            if Code.is_macos:
+                print("DEBUG: slider created")
 
-        bt_aceptar = Controles.PB(self, "", rutina=self.aceptar, plano=False).ponIcono(Iconos.Aceptar())
+            bt_aceptar = Controles.PB(self, "", rutina=self.aceptar, plano=False).ponIcono(Iconos.Aceptar())
+            
+            if Code.is_macos:
+                print("DEBUG: button created")
 
-        layout = Colocacion.G()
-        layout.control(bt_aceptar, 0, 0).control(self.cb, 0, 1).control(self.sb, 0, 2)
-        layout.controlc(self.sl, 1, 0, 1, 3).margen(5)
-        self.setLayout(layout)
+            layout = Colocacion.G()
+            layout.control(bt_aceptar, 0, 0).control(self.cb, 0, 1).control(self.sb, 0, 2)
+            layout.controlc(self.sl, 1, 0, 1, 3).margen(5)
+            self.setLayout(layout)
+            
+            if Code.is_macos:
+                print("DEBUG: layout set")
 
-        self.siOcupado = False
-        self.siCambio = False
-        self.board.allowed_extern_resize(False)
+            self.siOcupado = False
+            self.siCambio = False
+            self.board.allowed_extern_resize(False)
+            
+            if Code.is_macos:
+                print("DEBUG: WTamBoard initialization complete")
+                
+        except Exception as e:
+            if Code.is_macos:
+                print(f"DEBUG: Error in WTamBoard constructor: {e}")
+                import traceback
+                traceback.print_exc()
+            raise
 
     @staticmethod
     def width_for_cb(ap):
         return ap if ap in (80, 64, 48, 32, 24, 16) else 0
 
     def colocate(self):
+        import Code
+        if Code.is_macos:
+            print("DEBUG: WTamBoard colocate called")
         self.show()  # Necesario para que calcule bien el tama_o antes de colocar
         pos = self.board.parent().mapToGlobal(self.board.pos())
 
@@ -2697,6 +2785,8 @@ class WTamBoard(QtWidgets.QDialog):
             y = 0
         pos.setY(y)
         self.move(pos)
+        if Code.is_macos:
+            print(f"DEBUG: WTamBoard positioned at {pos.x()}, {pos.y()}")
 
     def aceptar(self):
         self.close()

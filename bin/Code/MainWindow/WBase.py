@@ -402,6 +402,7 @@ class WBase(QtWidgets.QWidget):
         self.with_shortcuts = with_shortcuts
 
         self.tb.clear()
+            
         if with_eboard:
             li_acciones = list(li_acciones)
             if TB_CONFIG in li_acciones:

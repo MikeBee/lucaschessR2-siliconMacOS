@@ -273,6 +273,12 @@ class PiezaSC(BloqueSC):
 
         # self.setFlag(QtWidgets.QGraphicsItem.ItemIsMovable, True)
         self.setFlag(QtWidgets.QGraphicsItem.ItemIgnoresTransformations, True)
+        
+        # Additional flags for macOS mouse event handling
+        import Code
+        if Code.is_macos:
+            self.setFlag(QtWidgets.QGraphicsItem.ItemIsSelectable, True)
+            self.setFlag(QtWidgets.QGraphicsItem.ItemSendsScenePositionChanges, True)
 
         pz = bloquePieza.pieza
         self.pixmap = board.piezas.render(pz)
@@ -285,8 +291,14 @@ class PiezaSC(BloqueSC):
         self.setAcceptHoverEvents(True)
 
         ancho = physical_pos.ancho
-        self.limL = -10  # ancho * 20 / 100
-        self.limH = ancho - self.limL
+        import Code
+        if Code.is_macos:
+            # Make dragable area much larger on macOS
+            self.limL = -ancho // 2
+            self.limH = ancho + (ancho // 2)
+        else:
+            self.limL = -10  # ancho * 20 / 100
+            self.limH = ancho - self.limL
         self.dragable = False
 
         self.dispatchMove = None
@@ -317,10 +329,13 @@ class PiezaSC(BloqueSC):
         self.setCursor(QtCore.Qt.ArrowCursor)
 
     def mousePressEvent(self, event):
+        import Code
         if self.dragable:
             self.ini_pos = event.scenePos()
             self.setZValue(ZVALUE_PIECE_MOVING)
             self.setCursor(QtCore.Qt.ClosedHandCursor)
+            if Code.is_macos:
+                event.accept()  # Explicitly accept the event on macOS
             QtWidgets.QGraphicsItem.mousePressEvent(self, event)
             if self.dispatchMove:
                 self.dispatchMove()
@@ -334,6 +349,11 @@ class PiezaSC(BloqueSC):
             punto = QtCore.QPointF(current_pos.x() - physical_pos.ancho/2, current_pos.y() - physical_pos.alto/2)
             self.setPos(punto)
             self.update()
+            import Code
+            if Code.is_macos:
+                # Force more aggressive updates on macOS
+                self.scene().update()
+                self.prepareGeometryChange()
             event.ignore()
         else:
             QtWidgets.QGraphicsItem.mouseMoveEvent(self, event)
@@ -350,6 +370,11 @@ class PiezaSC(BloqueSC):
     def activa(self, activate):
         self.setFlag(QtWidgets.QGraphicsItem.ItemIsMovable, activate)
         self.is_active = activate
+        import Code
+        if Code.is_macos:
+            # On macOS, make pieces immediately dragable when activated
+            if activate:
+                self.dragable = True
         if activate:
             self.setCursor(QtCore.Qt.OpenHandCursor)
             self.setFocus()

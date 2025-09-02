@@ -72,8 +72,13 @@ def refresh_gui():
     """
     Procesa eventos pendientes para que se muestren correctamente las windows
     """
-    QtCore.QCoreApplication.processEvents()
-    QtWidgets.QApplication.processEvents()
+    import Code
+    if Code.is_macos:
+        # Skip processEvents on macOS to avoid Qt enum issues
+        pass
+    else:
+        QtCore.QCoreApplication.processEvents()
+        QtWidgets.QApplication.processEvents()
 
 
 time_ini = time.time()

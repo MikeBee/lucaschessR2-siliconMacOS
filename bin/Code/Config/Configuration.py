@@ -302,20 +302,26 @@ class Configuration:
                 self._dic_books = {}
 
                 def add_folder(folder):
-                    entry: os.DirEntry
-                    for entry in os.scandir(folder):
-                        if entry.is_dir():
-                            add_folder(entry.path)
-                        elif entry.name.endswith(".bin"):
-                            self._dic_books[entry.name] = entry.path
+                    try:
+                        entry: os.DirEntry
+                        for entry in os.scandir(folder):
+                            if entry.is_dir():
+                                add_folder(entry.path)
+                            elif entry.name.endswith(".bin"):
+                                self._dic_books[entry.name] = entry.path
+                    except (FileNotFoundError, OSError):
+                        # Skip missing folders
+                        pass
 
                 add_folder(Code.path_resource("Openings"))
                 for engine in ("foxcub", "fox", "maia", "irina", "rodentii"):
-                    add_folder(Util.opj(Code.folder_engines, engine))
+                    engine_folder = Util.opj(Code.folder_engines, engine)
+                    if os.path.exists(engine_folder):
+                        add_folder(engine_folder)
         return self._dic_books
 
     def path_book(self, alias):
-        return self.dic_books[alias]
+        return self.dic_books.get(alias, None)
 
     def read_eval(self):
         d = {}
@@ -675,8 +681,18 @@ class Configuration:
 
     def combo_engines(self):
         li = []
+        import Code
         for key, cm in self.dic_engines.items():
-            li.append((cm.nombre_ext(), key))
+            # On macOS, only show engines that have Mac binaries
+            if Code.is_macos:
+                engine_name = cm.alias.lower()
+                mac_engines = {'maia-1100', 'maia-1200', 'maia-1300', 'maia-1400', 'maia-1500', 
+                              'maia-1600', 'maia-1700', 'maia-1800', 'maia-1900', 'irina', 
+                              'rodentii', 'stockfish-17.1-64', 'fox', 'foxcub'}
+                if any(mac_engine in engine_name for mac_engine in mac_engines):
+                    li.append((cm.nombre_ext(), key))
+            else:
+                li.append((cm.nombre_ext(), key))
         li.sort(key=lambda x: x[0].upper())
         return li
 

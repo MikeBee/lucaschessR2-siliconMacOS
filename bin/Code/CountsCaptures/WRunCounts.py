@@ -34,7 +34,11 @@ class WRunCounts(LCDialog.LCDialog):
         # Movimientos
         self.ed_moves = Controles.ED(self, "").set_font_type(puntos=32)
         self.ed_moves.setValidator(QtGui.QIntValidator(self.ed_moves))
-        self.ed_moves.setAlignment(QtCore.Qt.AlignRight)
+        import Code
+        if Code.is_macos:
+            self.ed_moves.setAlignment(QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignRight)))
+        else:
+            self.ed_moves.setAlignment(QtCore.Qt.AlignRight)
         self.ed_moves.anchoFijo(72)
 
         ly = Colocacion.H().relleno().control(self.ed_moves).relleno()

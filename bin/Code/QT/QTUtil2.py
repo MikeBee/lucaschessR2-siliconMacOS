@@ -46,12 +46,16 @@ class MensEspera(QtWidgets.QWidget):
             None if if_parent_none else parent
         )  # No se indica parent cuando le afecta el disable general, cuando se analiza posicion por ejemplo
 
-        self.setWindowFlags(
-            QtCore.Qt.WindowCloseButtonHint
-            | QtCore.Qt.Window
-            | QtCore.Qt.FramelessWindowHint
-            # | QtCore.Qt.WindowStaysOnTopHint
-        )
+        import Code
+        if Code.is_macos:
+            self.setWindowFlags(QtCore.Qt.Window)
+        else:
+            self.setWindowFlags(
+                QtCore.Qt.WindowCloseButtonHint
+                | QtCore.Qt.Window
+                | QtCore.Qt.FramelessWindowHint
+                # | QtCore.Qt.WindowStaysOnTopHint
+            )
         self.setStyleSheet("QWidget, QLabel { background: %s }" % background)
 
         lbi = None

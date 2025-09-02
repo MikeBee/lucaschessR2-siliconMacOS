@@ -4,6 +4,10 @@ import sys
 
 from Code import Util
 
+# Apply macOS Qt compatibility patches early
+# if sys.platform == "darwin":
+#     from Code.QT import QtMacCompat
+
 Util.randomize()
 
 current_dir = os.path.abspath(os.path.realpath(os.path.dirname(sys.argv[0])))
@@ -37,11 +41,35 @@ def path_resource(*lista):
 
 
 is_linux = sys.platform.startswith("linux")
-is_windows = not is_linux
+is_macos = sys.platform == "darwin"
 
-if is_linux:
+is_windows = not (is_linux or is_macos)
+
+if is_macos:
+    # Set up Qt message handler to suppress QPainter errors on macOS
+    try:
+        from PySide2 import QtCore
+        
+        def qt_message_handler(mode, context, message):
+            # Suppress specific QPainter errors that cause lockups on macOS
+            if any(error in message for error in [
+                "QPainter::begin: Paint device returned engine == 0",
+                "QPainter::setClipRegion: Painter not active", 
+                "QPainter::setRenderHint: Painter must be active"
+            ]):
+                return  # Ignore these errors
+            # Print other Qt messages normally  
+            print(f"Qt: {message}")
+        
+        QtCore.qInstallMessageHandler(qt_message_handler)
+        print("DEBUG: Qt message handler installed on macOS")
+    except Exception as e:
+        print(f"DEBUG: Failed to install Qt message handler: {e}")
+
+if is_linux or is_macos:
     startfile = os.system
-    os.environ["XDG_SESSION_TYPE"] = "xcb"
+    if is_linux:
+        os.environ["XDG_SESSION_TYPE"] = "xcb"
 else:
     if not sys.argv[0].endswith(".py"):
         os.environ["QT_PLUGIN_PATH"] = Util.opj(

@@ -224,9 +224,13 @@ class MarcoSC(BoardBlocks.BloqueEspSC):
         pm.fill(QtCore.Qt.transparent)
 
         painter = QtGui.QPainter()
-        painter.begin(pm)
-        self.paint(painter, None, None)
-        painter.end()
+        import Code
+        if painter.begin(pm):
+            self.paint(painter, None, None)
+            painter.end()
+        elif Code.is_macos:
+            # On macOS, if painter.begin() fails, skip painting to avoid errors
+            pass
 
         self.ponA1H8(bm.a1h8)
 

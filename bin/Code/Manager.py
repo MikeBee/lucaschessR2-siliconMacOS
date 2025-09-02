@@ -215,7 +215,12 @@ class Manager:
         self.procesador.close_engines()
 
     def set_toolbar(self, li_options):
+        import Code
+        if Code.is_macos:
+            print(f"DEBUG: Manager.set_toolbar called with {li_options}")
         self.main_window.pon_toolbar(li_options, with_eboard=self.with_eboard)
+        if Code.is_macos:
+            print("DEBUG: Manager.set_toolbar finished")
 
     def end_manager(self):
         # se llama from_sq procesador.start, antes de borrar el manager
@@ -741,9 +746,14 @@ class Manager:
         self.main_window.pgn_refresh(is_white)
 
     def refresh(self):
-        self.board.escena.update()
-        self.main_window.update()
-        QTUtil.refresh_gui()
+        import Code
+        if Code.is_macos:
+            # Skip all refresh operations on macOS to prevent QPainter issues
+            pass
+        else:
+            self.board.escena.update()
+            self.main_window.update()
+            QTUtil.refresh_gui()
 
     def mueve_number(self, tipo):
         game = self.game

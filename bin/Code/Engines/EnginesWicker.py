@@ -111,7 +111,11 @@ class EngineManagerWicker(EngineManager.EngineManager):
 
 def read_wicker_engines():
     configuration = Code.configuration
-    file = Code.path_resource("IntFiles", "wicker.ini")
+    # Use Mac-only engine list on macOS
+    if Code.is_macos:
+        file = Code.path_resource("IntFiles", "wicker_mac.ini")
+    else:
+        file = Code.path_resource("IntFiles", "wicker.ini")
 
     dic_wicker = Util.ini2dic(file)
     li = []
@@ -125,6 +129,9 @@ def read_wicker_engines():
         nom_book = dic["BOOK"]
         book_rr = dic.get("BOOKRR", BOOK_RANDOM_UNIFORM)
         book = configuration.path_book(nom_book)
+        if book is None:
+            # Skip engines with missing book files
+            return None
         max_plies = int(dic.get("BOOKMAXPLY", 0))
         if max_plies == 0:
             if elo >= 2200:

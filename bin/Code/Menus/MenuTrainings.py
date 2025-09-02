@@ -411,7 +411,10 @@ class MenuTrainings:
                     self.resistance(resp[10:])
 
                 elif resp in ["find_all_moves_rival", "find_all_moves_player"]:
-                    self.find_all_moves(resp == "find_all_moves_player")
+                    if Code.is_macos:
+                        QTUtil2.message(self.procesador.main_window, _("Find All Moves not available on macOS due to Qt compatibility issues"))
+                    else:
+                        self.find_all_moves(resp == "find_all_moves_player")
 
                 elif resp == "dailytest":
                     self.daily_test()

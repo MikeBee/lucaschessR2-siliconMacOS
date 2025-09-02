@@ -10,6 +10,11 @@ Lucas Chess (R) is a GUI of chess:
 
 This is an update of Lucas Chess with a new version of python (2.7 -> 3.7) and the main graphic library, from pyqt4 to pyside2 (qt4 -> qt5).
 
+Platform Support
+----------------
+* **Windows** - Full support
+* **Linux** - Full support  
+* **macOS** - Full support with native compatibility layer
 
 Incompatibilities
 -----------------

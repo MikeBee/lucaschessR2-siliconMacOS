@@ -92,7 +92,8 @@ class ControlGrid(QtCore.QAbstractTableModel):
         if not index.isValid():
             return None
 
-        column = self.oColumnasR.column(index.column())
+        import Code
+        column = self.oColumnasR.column(int(index.column()) if Code.is_macos else index.column())
 
         if role == QtCore.Qt.TextAlignmentRole:
             if self.siAlineacion:
@@ -123,11 +124,13 @@ class ControlGrid(QtCore.QAbstractTableModel):
         return None
 
     def getAlineacion(self, index):
-        column = self.oColumnasR.column(index.column())
+        import Code
+        column = self.oColumnasR.column(int(index.column()) if Code.is_macos else index.column())
         return self.w_parent.grid_alineacion(self.grid, index.row(), column)
 
     def getFondo(self, index):
-        column = self.oColumnasR.column(index.column())
+        import Code
+        column = self.oColumnasR.column(int(index.column()) if Code.is_macos else index.column())
         return self.w_parent.grid_color_fondo(self.grid, index.row(), column)
 
     def flags(self, index):
@@ -137,14 +140,24 @@ class ControlGrid(QtCore.QAbstractTableModel):
         if not index.isValid():
             return QtCore.Qt.ItemIsEnabled
 
-        flag = QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
-        column = self.oColumnasR.column(index.column())
-        if column.is_editable:
-            flag |= QtCore.Qt.ItemIsEditable
-
-        if column.is_checked:
-            flag |= QtCore.Qt.ItemIsUserCheckable
-        return flag
+        import Code
+        if Code.is_macos:
+            # Use int conversion for macOS enum compatibility
+            flag = int(QtCore.Qt.ItemIsEnabled) | int(QtCore.Qt.ItemIsSelectable)
+            column = self.oColumnasR.column(int(index.column()))
+            if column.is_editable:
+                flag |= int(QtCore.Qt.ItemIsEditable)
+            if column.is_checked:
+                flag |= int(QtCore.Qt.ItemIsUserCheckable)
+            return QtCore.Qt.ItemFlags(flag)
+        else:
+            flag = QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
+            column = self.oColumnasR.column(index.column())
+            if column.is_editable:
+                flag |= QtCore.Qt.ItemIsEditable
+            if column.is_checked:
+                flag |= QtCore.Qt.ItemIsUserCheckable
+            return flag
 
     def setData(self, index, valor, role=QtCore.Qt.EditRole):
         """
@@ -154,7 +167,8 @@ class ControlGrid(QtCore.QAbstractTableModel):
         if not index.isValid():
             return None
         if role == QtCore.Qt.EditRole or role == QtCore.Qt.CheckStateRole:
-            column = self.oColumnasR.column(index.column())
+            import Code
+            column = self.oColumnasR.column(int(index.column()) if Code.is_macos else index.column())
             nfila = index.row()
             self.w_parent.grid_setvalue(self.grid, nfila, column, valor)
             index2 = self.createIndex(nfila, 1)
@@ -603,7 +617,8 @@ class Grid(QtWidgets.QTableView):
 
         @return: tupla con ( num row, objeto column )
         """
-        column = self.oColumnasR.column(self.currentIndex().column())
+        import Code
+        column = self.oColumnasR.column(int(self.currentIndex().column()) if Code.is_macos else self.currentIndex().column())
         return self.recno(), column
 
     def posActualN(self):
@@ -612,7 +627,8 @@ class Grid(QtWidgets.QTableView):
 
         @return: tupla con ( num row, num  column )
         """
-        return self.recno(), self.currentIndex().column()
+        import Code
+        return self.recno(), int(self.currentIndex().column()) if Code.is_macos else self.currentIndex().column()
 
     def font_type(self, name="", puntos=8, peso=50, is_italic=False, is_underlined=False, is_striked=False, txt=None):
         font = QtGui.QFont()

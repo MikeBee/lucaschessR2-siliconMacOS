@@ -51,11 +51,19 @@ class ED(QtWidgets.QLineEdit):
         return txt
 
     def align_center(self):
-        self.setAlignment(QtCore.Qt.AlignHCenter)
+        import Code
+        if Code.is_macos:
+            self.setAlignment(QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignHCenter)))
+        else:
+            self.setAlignment(QtCore.Qt.AlignHCenter)
         return self
 
     def align_right(self):
-        self.setAlignment(QtCore.Qt.AlignRight)
+        import Code
+        if Code.is_macos:
+            self.setAlignment(QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignRight)))
+        else:
+            self.setAlignment(QtCore.Qt.AlignRight)
         return self
 
     def anchoMinimo(self, px):
@@ -118,7 +126,11 @@ class ED(QtWidgets.QLineEdit):
             else:
                 self.decimales = decimales
             self.setValidator(QtGui.QDoubleValidator(from_sq, to_sq, decimales, self))
-        self.setAlignment(QtCore.Qt.AlignRight)
+        import Code
+        if Code.is_macos:
+            self.setAlignment(QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignRight)))
+        else:
+            self.setAlignment(QtCore.Qt.AlignRight)
         self.ponFloat(valor)
         return self
 
@@ -147,7 +159,11 @@ class ED(QtWidgets.QLineEdit):
         @param valor: valor inicial
         """
         self.setValidator(QtGui.QIntValidator(self))
-        self.setAlignment(QtCore.Qt.AlignRight)
+        import Code
+        if Code.is_macos:
+            self.setAlignment(QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignRight)))
+        else:
+            self.setAlignment(QtCore.Qt.AlignRight)
         self.ponInt(valor)
         return self
 
@@ -326,7 +342,11 @@ class LB(QtWidgets.QLabel):
             QtWidgets.QLabel.__init__(self, parent)
 
         self.setOpenExternalLinks(True)
-        self.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction | QtCore.Qt.TextSelectableByMouse)
+        import Code
+        if Code.is_macos:
+            self.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction)
+        else:
+            self.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction | QtCore.Qt.TextSelectableByMouse)
 
     def set_text(self, texto):
         self.setText(texto)
@@ -346,11 +366,19 @@ class LB(QtWidgets.QLabel):
         return self
 
     def align_center(self):
-        self.setAlignment(QtCore.Qt.AlignCenter)
+        import Code
+        if Code.is_macos:
+            self.setAlignment(QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignCenter)))
+        else:
+            self.setAlignment(QtCore.Qt.AlignCenter)
         return self
 
     def align_right(self):
-        self.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+        import Code
+        if Code.is_macos:
+            self.setAlignment(QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignRight)))
+        else:
+            self.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
         return self
 
     def anchoMaximo(self, px):
@@ -539,7 +567,12 @@ class GB(QtWidgets.QGroupBox):
         return self
 
     def align_center(self):
-        self.setAlignment(QtCore.Qt.AlignHCenter)
+        import Code
+        if Code.is_macos:
+            # Skip alignment setting on macOS to avoid enum issues
+            pass
+        else:
+            self.setAlignment(QtCore.Qt.AlignHCenter)
         return self
 
     def to_connect(self, rutina):
@@ -755,8 +788,10 @@ class Menu(QtWidgets.QMenu):
             self.addSeparator()
 
     def lanza(self):
-        QtCore.QCoreApplication.processEvents()
-        QtWidgets.QApplication.processEvents()
+        import Code
+        if not Code.is_macos:
+            QtCore.QCoreApplication.processEvents()
+            QtWidgets.QApplication.processEvents()
         resp = self.exec_(QtGui.QCursor.pos())
         if resp:
             return resp.key

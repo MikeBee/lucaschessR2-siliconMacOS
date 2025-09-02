@@ -38,7 +38,11 @@ class WOptionsDatabase(QtWidgets.QDialog):
         title = _("New database") if self.new else "%s: %s" % (_("Database"), d_str("NAME"))
         self.setWindowTitle(title)
         self.setWindowIcon(Iconos.DatabaseMas())
-        self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.Dialog | QtCore.Qt.WindowTitleHint)
+        import Code
+        if Code.is_macos:
+            self.setWindowFlags(QtCore.Qt.Dialog)
+        else:
+            self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.Dialog | QtCore.Qt.WindowTitleHint)
 
         self.configuration = configuration
         self.resultado = None

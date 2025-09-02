@@ -97,10 +97,14 @@ class Columna:
         self.siMostrarDef = col.siMostrarDef
 
     def QTalineacion(self, alin):
+        import Code
         if alin == "c":
             qtalin = QtCore.Qt.AlignCenter
         elif alin == "d":
-            qtalin = int(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+            if Code.is_macos:
+                qtalin = QtCore.Qt.AlignmentFlag(int(QtCore.Qt.AlignRight) | int(QtCore.Qt.AlignVCenter))
+            else:
+                qtalin = int(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
         else:
             qtalin = QtCore.Qt.AlignVCenter
 

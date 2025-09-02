@@ -24,8 +24,10 @@ class MesaSonido(QtWidgets.QGraphicsView):
     def __init__(self, parent):
         QtWidgets.QGraphicsView.__init__(self)
 
-        self.setRenderHint(QtGui.QPainter.Antialiasing)
-        self.setRenderHint(QtGui.QPainter.TextAntialiasing)
+        import Code
+        if not Code.is_macos:
+            self.setRenderHint(QtGui.QPainter.Antialiasing)
+            self.setRenderHint(QtGui.QPainter.TextAntialiasing)
         self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.setTransformationAnchor(self.NoAnchor)

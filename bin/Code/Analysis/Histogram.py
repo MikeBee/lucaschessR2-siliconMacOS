@@ -235,7 +235,9 @@ class Histogram(QtWidgets.QGraphicsView):
         self.scene = scene
         # self.setCacheMode(QtWidgets.QGraphicsView.CacheBackground)
         self.setViewportUpdateMode(QtWidgets.QGraphicsView.BoundingRectViewportUpdate)
-        self.setRenderHint(QtGui.QPainter.Antialiasing)
+        import Code
+        if not Code.is_macos:
+            self.setRenderHint(QtGui.QPainter.Antialiasing)
         self.setTransformationAnchor(QtWidgets.QGraphicsView.AnchorUnderMouse)
         self.setResizeAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
 

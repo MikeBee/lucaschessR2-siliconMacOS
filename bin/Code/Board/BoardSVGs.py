@@ -199,9 +199,10 @@ class SVGSC(BoardBlocks.BloqueEspSC):
         pm.fill(QtCore.Qt.transparent)
 
         painter = QtGui.QPainter()
-        painter.begin(pm)
-        self.paint(painter, None, None)
-        painter.end()
+        import Code
+        if painter.begin(pm):
+            self.paint(painter, None, None)
+            painter.end()
 
         self.ponA1H8(bm.a1h8)
         bm.psize = ant_psize
